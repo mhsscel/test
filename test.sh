@@ -2,10 +2,12 @@
 
 read -p "Digite o Usuario: " GNU_USER
 
-sudo useradd -m $GNU_USER
-
 read -p "Digite a Senha do Usuario: " GNU_PASS
 
-echo -e $GNU_PASS"\n"$GNU_PASS | passwd $GNU_USER
+shift 2
 
-echo $GNU_USER"\n"$GNU_PASS
+fname="$*"
+
+useradd -m -s /bin/bash -c "$fname" "$GNU_USER"
+
+echo "$GNU_USER:$GNU_PASS" | chpasswd
